@@ -1,0 +1,28 @@
+getwd() 	- текущий каталог 
+setwd() 	- изменить каталог
+?команда 	- помощь 
+CTRL+L		- очистить экран
+
+печать:
+cat("Wartość a=",a)
+cat("Wartość a=",a,sep="")
+paste("Hello", "world")
+paste("Hello", "world", sep = ", ")
+	*paste() использует разделитель между строками, а 
+	*paste0() объединяет строки без разделителя.
+	
+	*names <- c("Alice", "Bob", "Carol")
+	*ages <- c(25, 30, 28)
+	*paste(names, ages)
+	*# Вывод: "Alice 25" "Bob 30" "Carol 28"
+	*paste0(names, ages)
+	*# Вывод: "Alice25" "Bob30" "Carol28"
+
+удаление переменной:
+rm(a)
+
+проверка и изминение типов:
+typeof(a) 	- определяет тип объекта a.
+class(a) 	- определяет класс объекта a.
+is.double(a) 	- проверяет, является ли объект a типом double
+as.double(a) 	- преобразует объект a в тип double 
