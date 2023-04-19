@@ -1,0 +1,103 @@
+Загрузка данных: 
+	read.table();
+	df<-read.table("sample.csv") или 
+	df<-read.table("sample.csv", header = T) или
+	df<-read.table("sample.csv", header = T, sep = ",") или
+	df <- read.table("sample.csv",header=T,sep=",",stringsAsFactors=T)
+	header 		за дефолтом(False)
+	stringAsFactors 	за дефолтом(False)
+	df или df$V1
+	
+	read.csv()
+	
+Пакет dplyr:
+	install.package("dplyr")
+	library(dplyr)
+
+	filter() - выбор строк, удовлетворяющих условиям в столбцах
+		# Загрузка пакета dplyr
+		library(dplyr)
+		data <- data.frame(
+		  name = c("John", "Alice", "Bob", "Eve"),
+		  age = c(32, 24, 28, 30),
+		  city = c("New York", "Los Angeles", "San Francisco", "Los Angeles")
+		)
+		result <- data %>% filter(age > 28)
+		------------------------------------------------------
+		filter(df,Age<35)
+		df[df$Age<35,]
+
+		filter(df,Age<35,Residence="Boston")
+		df[(df$Age<35 & df$Residence="Boston"),]
+
+		filter(df,Age<35,Residence="Boston" | Resudence="Middletown")
+		filter(df,Age<35,Residence %in% c("Boston","Middletown"))
+		-----------------------------------------------------
+	select() - выбор данных по названиям столбцов
+		result <- data %>% select(name, age)
+		-----------------------------------------------------
+		library(dplyr)
+		data <- data.frame(a = 1:5, b = 6:10, abc = 11:15, xyz = 16:20, ijk = 21:25)
+		result1 <- data %>% select(starts_with("a"))
+		result2 <- data %>% select(ends_with("z"))
+		result3 <- data %>% select(contains("i"))
+		result4 <- data %>% select(everything())
+		-----------------------------------------------------
+	arrange() - изменение порядка строк
+		library(dplyr)
+		data <- data.frame(
+		  name = c("Анна", "Иван", "Мария", "Василий"),
+		  age = c(30, 22, 45, 33),
+		  salary = c(50000, 30000, 70000, 55000)
+		)
+		# Сортировка строк по возрастанию значения столбца 'age'
+		sorted_data <- data %>% arrange(age)
+		# Сортировка строк по убыванию значения столбца 'salary'
+		sorted_data_desc <- data %>% arrange(desc(salary))
+		# Сортировка строк по возрастанию значения столбца 'age', 
+		а затем по убыванию значения столбца 'salary'
+		sorted_data_multiple <- data %>% arrange(age, desc(salary))
+		------------------------------------------------------
+		arrange(df, Age)
+		arrange(df, desc(Age))
+		arrange(df, Residence)
+		arrange(df, Residence, Age)
+		------------------------------------------------------
+	mutate() - создание новых данных, являющихся функцией существующих
+		# Создание нового столбца 'age_group' на основе столбца 'age'
+		result <- data %>% mutate(age_group = ifelse(age <= 25, "young", "old"))
+		------------------------------------------------------
+		Опция .keep:
+		="all" - оставляет все столбцы
+		="none" - оставляет только новые столбцы (альтернатива transmute)
+		="used" - оставляет только столбцы, участвующие в операциях
+		="unused" - оставляет только столбцы, не участвующие в операциях
+		mutate(df, BMI = Weights / Heights^2)
+		mutate(df, email=paste0(Name,"@ujd.edu.pl"))
+		mutate(df, BMI = Weights / Heights^2, .keep="none")
+		mutate(df, BMI = Weights / Heights^2, .keep="used")
+		mutate(df, BMI = Weights / Heights^2, .keep="unused")
+		-------------------------------------------------------
+		Примеры кода:
+		mutate(df, BMI = Weights / Heights^2) 
+		- добавляет новый столбец "BMI" в data.frame "df", 
+		вычисляя его как вес делённый на квадрат роста.
+		mutate(df, email=paste0(Name,"@ujd.edu.pl")) 
+		- добавляет новый столбец "email" в data.frame "df", 
+		объединяя значения столбца "Name" с доменом "@ujd.edu.pl".
+		mutate(df, BMI = Weights / Heights^2, .keep="none") 
+		- аналогично примеру 1, 
+		но в итоговом data.frame оставляет только новый столбец "BMI".
+		mutate(df, BMI = Weights / Heights^2, .keep="used") 
+		- аналогично примеру 1, но в итоговом data.frame оставляет только столбцы,
+		участвующие в операции и новый столбец "BMI".
+		mutate(df, BMI = Weights / Heights^2, .keep="unused") 
+		- аналогично примеру 1, но в итоговом data.frame оставляет только столбцы, 
+		не участвующие в операции.
+		-------------------------------------------------------
+	rename() - переименование выбраных столбцов 
+		names(df)[3] <- "новое_имя" - алтернатива 
+		rename(df, "новое_имя" = "старое_имя")
+		select(filter(df, Active == TRUE), Age)
+		filter(df, Active == TRUE) %>% select(Age)
+		rename_with(df, toupper)
