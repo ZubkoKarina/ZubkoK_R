@@ -1,0 +1,18 @@
+Пропущенные данные в R: 
+    Na - не доступно
+    NaN - не число
+    is.na() - функция проверки на пропущенные данные
+    is.nan() - функция проверки на NaN
+    c<-0/0 - NaN
+    airquality[is.na(airquality)] - пропущенные данные ?
+    compale.cases() - сравнение двух векторов
+        data <- data.frame(col1 = c(1, 2, NA, 4), col2 = c(2, NA, 4, 5), col3 = c(NA, 3, 5, 6))
+        complete.cases(data) 
+        # Результат: [1] FALSE FALSE FALSE  TRUE
+    na.omit() - удаление пропущенных данных
+        data <- data.frame(col1 = c(1, 2, NA, 4), col2 = c(2, NA, 4, 5), col3 = c(NA, 3, 5, 6))
+        na.omit(data)
+        # Результат: col1 col2 col3
+        #            1    2    3
+        #            4    5    6
+
