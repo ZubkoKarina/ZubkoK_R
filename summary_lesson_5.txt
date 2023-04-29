@@ -1,0 +1,8 @@
+Библиотека ggplot2 - стандарт для визуализации данных.
+	Пример постоения гистограммы: 
+	library(ggplot2)
+	data <- c(2, 3, 5, 2, 6, 2, 8, 3, 5, 7, 3, 6, 4, 9, 3, 6, 5, 8, 4, 2)
+	ggplot(data, aes(x=data)) + 
+	  geom_histogram(binwidth=1, colour="black", fill="white") +
+	  ggtitle("Histogram of Data")
+
