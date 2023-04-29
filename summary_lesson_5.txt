@@ -5,4 +5,56 @@
 	ggplot(data, aes(x=data)) + 
 	  geom_histogram(binwidth=1, colour="black", fill="white") +
 	  ggtitle("Histogram of Data")
+Это описание графической грамматики, основанной на наблюдении, что любой график можно уникальным образом описать с помощью комбинации:
+• набора данных,
+• геометрической функции,
+• набора отображений,
+• статистических преобразований,
+• подгонки положения,
+• системы координат
+• и схемы панелей.
+	Пример кода на R, который использует графическую грамматику для построения графика с помощью 
+	пакета ggplot2:
+	library(ggplot2)
+	ggplot(data = mpg, aes(x = displ, y = hwy, color = class)) +
+	  geom_point() +
+	  scale_color_brewer(palette = "Dark2") +
+	  labs(title = "Fuel efficiency vs. engine displacement",
+	       x = "Engine displacement (L)",
+	       y = "Highway miles per gallon (mpg)")
+install.packages("ggplot2")
+library(ggplot2)
+	A<-c(2,1,4,9)
+	B<-c(3,2,5,12)
+	C<-c(4,1,15,8)
+	D<-c("a","a","b","b")
+	mydata <- data.frame(A,B,C,D)
+	# Загрузка необходимых пакетов
+library(ggplot2)
+# Создание фиктивного набора данных
+mydata <- data.frame(A = c(1, 2, 3, 4, 5), B = c(10, 20, 30, 40, 50), C = c(5, 4, 3, 2, 1), D = c("A", "B", "A", "B", "A"))
+# Создание графика
+p <- ggplot(data=mydata, mapping=aes(x=A, y=C))
+# Добавление точек на график
+p <- p + geom_point(mapping=aes(shape=D), stat="identity", size=4, position="identity")
+# Изменение осей
+p <- p + scale_x_continuous() + scale_y_log10()
+# Изменение координатной сетки
+p <- p + coord_cartesian()
+# Добавление сетки
+p <- p + facet_grid(cols=vars(D))
+# Отображение графика
+p
+	создает график точек (scatter plot) на основе данных из фрейма данных (data frame) с 
+	названием "mydata". График имеет ось x, представленную столбцом "A", и ось y в 
+	логарифмическом масштабе, представленную столбцом "C". Также график разбивается на несколько 
+	подграфиков в зависимости от значений столбца "D" и использует различные формы маркеров для 
+	каждой группы точек.
+		Пример кода R:
+		library(ggplot2)
+		p2 <- ggplot(mydata, aes(A,C)) + 
+		      geom_point(aes(shape=D), size=4) + 
+		      scale_y_log10() + 
+		      facet_grid(cols=vars(D))
 
+		
