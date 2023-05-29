@@ -56,3 +56,4 @@ p
 		      geom_point(aes(shape=D), size=4) + 
 		      scale_y_log10() + 
 		      facet_grid(cols=vars(D))
+
